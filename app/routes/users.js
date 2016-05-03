@@ -1,7 +1,6 @@
 var router = require('koa-router')();
+var users = require('../controllers/users')
 
-router.get('/', function *(next) {
-  this.body = 'this a users response!';
-});
+router.get('/users', users.list);
 
 module.exports = router;

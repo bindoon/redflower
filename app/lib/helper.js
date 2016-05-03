@@ -1,9 +1,8 @@
 'use strict';
 
 const _ = require('lodash');
-const midway = require('midway');
-const config = midway.getConfig();
-const log = midway.getLogger();
+
+const logger = require('koa-logger');
 
 module.exports = {
 
@@ -22,7 +21,7 @@ module.exports = {
                 try {
                     yield obj[key].apply(this);
                 } catch (err) {
-                    log.error(err);
+                    logger.error(err);
                     this.body = {success: false, message: err.message, stack: err.stack};
                 }
             };

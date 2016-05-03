@@ -49,7 +49,7 @@ function addRouterFromFolder() {
                     addRouterFromFolder(filePath);
                 } else if (fileStat.isFile()) {
                     var requireRouter = require(filePath);
-                    koa.use('/',requireRouter.routes(),requireRouter.allowedMethods());
+                    koa.use('',requireRouter.routes(),requireRouter.allowedMethods());
                     console.info('[router] %s is attached successfully',filePath);
                 }
             });
