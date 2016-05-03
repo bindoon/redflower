@@ -9,6 +9,8 @@ var app = require('koa')()
   , onerror = require('koa-onerror');
 
 
+const routers = require('./app/routers');
+
 //xtemplate模板渲染
 xtpl(app,{
     //配置模板目录，指向工程的view目录
@@ -36,32 +38,9 @@ app.use(require('koa-static')(__dirname + 'app/public'));
 
 
 
-function addRouterFromFolder() {
-    var folderPath =  path.join(__dirname, 'app/routes/');
 
-    if (fs.existsSync(folderPath)) {
-        try {
-            fs.readdirSync(folderPath).forEach(function(fileName) {
-                var filePath = path.join(folderPath, fileName),
-                    fileStat = fs.statSync(filePath);
-
-                if (fileStat.isDirectory()) {
-                    addRouterFromFolder(filePath);
-                } else if (fileStat.isFile()) {
-                    var requireRouter = require(filePath);
-                    koa.use('',requireRouter.routes(),requireRouter.allowedMethods());
-                    console.info('[router] %s is attached successfully',filePath);
-                }
-            });
-        } catch (ex) {
-            console.error(
-                '[router] failed to add router directory: %s, %s', folderPath, ex);
-        }
-    }
-}
-addRouterFromFolder()
 // // routes definition
-// koa.use('/', index.routes(), index.allowedMethods());
+koa.use('*', routers.routes(), routers.allowedMethods());
 // koa.use('/users', users.routes(), users.allowedMethods());
 
 // // mount root routes
