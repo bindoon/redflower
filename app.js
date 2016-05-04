@@ -37,10 +37,8 @@ app.use(function *(next){
 app.use(require('koa-static')(__dirname + 'app/public'));
 
 
-
-
 // // routes definition
-koa.use('*', routers.routes(), routers.allowedMethods());
+koa.use('', routers.routes(), routers.allowedMethods());
 // koa.use('/users', users.routes(), users.allowedMethods());
 
 // // mount root routes
