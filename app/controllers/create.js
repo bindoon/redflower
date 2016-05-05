@@ -51,7 +51,7 @@ let createController = {
         success:true,
         message:'success'
       }
-    },
+    }
 
 
 

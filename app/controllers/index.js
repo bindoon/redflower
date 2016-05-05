@@ -55,7 +55,7 @@ let indexController = {
         success:true,
         message:'success'
       }
-    },
+    }
 
 
 
