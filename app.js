@@ -8,6 +8,7 @@ var app = require('koa')()
   , fs = require('fs')
   , onerror = require('koa-onerror');
 
+global.db = require('./app/models');
 
 const routers = require('./app/routers');
 

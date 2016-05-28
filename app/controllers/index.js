@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * 首页
+ * @type {dev|exports|module.exports}
+ */
 
 const logger = require('koa-logger');
 const helper = require('../lib/helper');
@@ -42,22 +46,7 @@ let indexController = {
             ]
         }
       }
-    },
-    remove:function *(next) {
-
-      this.body = {
-        success:true,
-        message:'success'
-      }
-    },
-    checkin:function *(next) {    //完成失败
-      this.body = {
-        success:true,
-        message:'success'
-      }
     }
-
-
 
 };
 
