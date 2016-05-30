@@ -23,6 +23,11 @@ let indexController = {
     },
 
     tasklist:function *(next) {
+        let err =  helper.checkParams(this.getParams(),['userid']);
+        if(err.length) {
+            this.body = helper.error(err.join(',')+' required');
+            return;
+        }
 
       this.body = {
         success:true,

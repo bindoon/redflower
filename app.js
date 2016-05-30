@@ -29,10 +29,24 @@ app.use(json());
 app.use(logger());
 
 app.use(function *(next){
-  var start = new Date;
-  yield next;
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
+
+    this.response.set("Access-Control-Allow-Origin","*");
+    this.response.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+
+    var params = this.query;
+    params = Object.assign({},params,this.request.body);
+    this.getParam = function (key) {
+        return params[key];
+    }
+    this.getParams = function() {
+        return params;
+    }
+
+    var start = new Date;
+    yield next;
+
+    var ms = new Date - start;
+    console.log('%s %s - %s', this.method, this.url, ms);
 });
 
 app.use(require('koa-static')(__dirname + 'app/public'));

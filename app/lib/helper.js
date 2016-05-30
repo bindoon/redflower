@@ -49,7 +49,19 @@ module.exports = {
         });
 
         return result;
+    },
+
+    checkParams(obj,list) {
+        return list.map((i)=>{
+            return i in obj? null:i;
+        }).filter((i)=>{
+            return i!=null
+        })
+    },
+    error(message) {
+      return {
+          success:false,
+          message
+      }
     }
-
-
 };
