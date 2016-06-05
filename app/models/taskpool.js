@@ -38,7 +38,7 @@ const TaskPool = db.define('TaskPool', getModelDefine(), {
     classMethods: {
 
         getObject(data) {
-            const keys = ['id','title','desc', 'click'];
+            const keys = ['id','title'];
             return helper.getObjByKeys(data, keys);
         }
 

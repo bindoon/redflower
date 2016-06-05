@@ -8,6 +8,7 @@
 const logger = require('koa-logger');
 const helper = require('../lib/helper');
 
+const UserTask = require('../models/usertask');
 
 
 let indexController = {
@@ -23,30 +24,34 @@ let indexController = {
     },
 
     tasklist:function *(next) {
-        let err =  helper.checkParams(this.getParams(),['userid']);
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['userid']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
         }
 
-      this.body = {
+        let usertask = yield UserTask.findAll({where:{userid:params.userid}});
+
+
+        this.body = {
         success:true,
         message:'success',
         result: {
             data: [{
+                taskid:1,
                 title:'每日早起',
-                alarmClock:'6:03',
-                repeatDay:[0,1,2], //周末，周一，周二
+                alarm:'6:03',
                 weekFlower:29,
                 insistMonth:4,
-                isPrivate:false
+                private:false
             },{
+                taskid:2,
                 title:'每日练功一小时',
-                alarmClock:'14:03',
-                repeatDay:[1,2], //周末，周一，周二
+                alarm:'14:03',
                 weekFlower:20,
                 insistMonth:5,
-                isPrivate:false
+                private:false
             }
             ]
         }

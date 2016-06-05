@@ -4,16 +4,21 @@
 const logger = require('koa-logger');
 const helper = require('../lib/helper');
 
-const TaskPool = require('../models/taskpool');
+const UserTask = require('../models/usertask');
+const Checkin = require('../models/checkin');
+const Thought = require('../models/thought');
 
 
 let taskController = {
     checkin:function *(next) {   //完成失败
-        let err =  helper.checkParams(this.getParams(),['userid','taskid','state']);
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['userid','taskid','state']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
         }
+
+        let result = yield Checkin.create(params);
 
         this.body = {
             success:true,
@@ -28,6 +33,8 @@ let taskController = {
             return;
         }
 
+        let result = yield UserTask.update(params);
+
         this.body = {
             success:true,
             message:'success'
@@ -40,7 +47,7 @@ let taskController = {
             return;
         }
 
-        let result = yield TaskPool.findAll();
+        let result = yield UserTask.remove(params);
 
         this.body = {
             success:true,
@@ -55,7 +62,7 @@ let taskController = {
             return;
         }
 
-        let result = yield TaskPool.findAll();
+        let result = yield Thought.create(params);
 
         this.body = {
             success:true,
@@ -70,7 +77,7 @@ let taskController = {
             return;
         }
 
-        let result = yield TaskPool.findAll();
+        let result = yield UserTask.findAll();
 
         this.body = {
             success:true,
@@ -95,7 +102,7 @@ let taskController = {
             return;
         }
 
-        let result = yield TaskPool.findAll();
+        let result = yield Thought.findAll();
 
         this.body = {
             "success":true,
@@ -103,7 +110,7 @@ let taskController = {
                 "list":[{
                     "pics":[],
                     "content":"",
-                    "time": "2016-4-4 4:4:4"
+                    "createat": "2016-4-4 4:4:4"
                 }]
             }
 

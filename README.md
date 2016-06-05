@@ -29,11 +29,33 @@ http://bouda.cn:3300/
 |---|---|---|
 |keyword|查询关注|必传|
 
-* 创建 /api/create/new    
+* 创建一个公共功课 /api/create/newname    
 
     |入参|描述|可选值|
 |---|---|---|
-|||必传|
+|keyword|创建|必传|
+
+返回
+
+```
+{
+    "success":true,
+    "result":{
+        "info":{
+            "taskid":1,
+        }
+    }
+}
+```
+
+* 创建自己的功课 /api/create/new
+
+    |入参|描述|可选值|
+|---|---|---|
+|taskid||必传|
+|desc|一句话目标||
+|alarm|时钟||
+
 
 ### 任务配置
 * 私密 /api/task/private  

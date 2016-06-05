@@ -11,44 +11,52 @@ function getModelDefine() {
             autoIncrement: true,
             comment: '页面id'
         },
-        project_id: {
+        taskid: {
             type: db.Sequelize.INTEGER,
             allowNull: false,
-            comment: '所属项目id'
+            comment: '任务id'
+        },
+        userid: {
+            type: db.Sequelize.STRING,
+            allowNull: false,
+            comment: '用户id'
         },
         title: {
             type: db.Sequelize.STRING,
             allowNull: false,
             comment: '页面标题'
         },
-        creator: {
-            type: db.Sequelize.INTEGER,
-            allowNull: false,
-            comment: '创建人'
-        },
-        json: {
-            type: db.Sequelize.TEXT,
-            comment: '页面json',
-            defaultValue: '{};'
-        },
-        package_url: {
+        desc: {
             type: db.Sequelize.STRING,
-            comment: '页面组件包cdn地址'
+            allowNull: false,
+            comment: '描述'
+        },
+        pic: {
+            type: db.Sequelize.STRING,
+            allowNull: false,
+            comment: '图片'
+        },
+        alarm: {
+            type: db.Sequelize.DATE,
+            comment: '闹钟'
+        },
+        private: {
+            type:db.Sequelize.BOOLEAN,
+            comment: '私有'
         }
     };
-
 }
 
-const PageDo = db.define('Page', getModelDefine(), {
+const UserTask = db.define('UserTask', getModelDefine(), {
 
-    tableName: 'page',
+    tableName: 't_usertask',
     timestamps: true,
 
     // 类方法
     classMethods: {
 
         getObject(data) {
-            const keys = ['id','project_id','title','creator', 'json', 'package_url'];
+            const keys = ['id','taskid','userid','title','desc'];
             return helper.getObjByKeys(data, keys);
         }
 
@@ -60,5 +68,5 @@ const PageDo = db.define('Page', getModelDefine(), {
 
 });
 
-module.exports = PageDo;
+module.exports = UserTask;
 

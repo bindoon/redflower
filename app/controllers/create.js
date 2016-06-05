@@ -3,23 +3,27 @@
 
 const logger = require('koa-logger');
 const helper = require('../lib/helper');
+const TaskPool = require('../models/taskpool');
+const UserTask = require('../models/usertask');
 
 
 
 let createController = {
     hotlist:function *(next) {
 
-      this.body = {
+        let TaskPool = yield TaskPool.findAll();
+
+        this.body = {
         success:true,
         message:'success',
         result: {
             data: [{
                 title:'每天阅读半小时',
-                nowNum:100
+                nowNum:101
 
             },{
                 title:'每天早起',
-                nowNum:100
+                nowNum:99
 
             },{
                 title:'戒烟',
@@ -46,14 +50,53 @@ let createController = {
         }
       }
     },
+    newname:function*(next) {
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['keyword']);
+        if(err.length) {
+            this.body = helper.error(err.join(',')+' required');
+            return;
+        }
+
+        let result = yield TaskPool.findOrCreate({
+            where:{
+                title:params.keyword
+            }
+        });
+
+        this.body = {
+            success:true,
+            message:'success',
+            result:{
+                info:{
+                    taskid:result[0].dataValues.id
+                }
+            }
+        }
+    },
     new:function *(next) {    //完成失败
-      this.body = {
-        success:true,
-        message:'success'
-      }
+
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['taskid','desc','alarm']);
+        if(err.length) {
+            this.body = helper.error(err.join(',')+' required');
+            return;
+        }
+
+        let result = yield UserTask.create({
+            taskid:params.taskid,
+            desc:params.desc,
+            alarm:params.alarm
+        });
+
+        this.body = {
+            success:true,
+            message:'success',
+            result:{
+                info:result[0].dataValues
+            }
+        }
     }
-
-
 
 };
 

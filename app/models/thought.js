@@ -9,46 +9,41 @@ function getModelDefine() {
             type: db.Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            comment: 'id'
+            comment: '页面id'
         },
-        email: {
-            type: db.Sequelize.STRING,
-            allowNull: false,
-            comment: '邮箱'
-        },
-        username: {
-            type: db.Sequelize.STRING,
-            allowNull: false,
-            comment: '页面标题'
-        },
-        password: {
+        taskid: {
             type: db.Sequelize.INTEGER,
             allowNull: false,
-            comment: '创建人'
+            comment: '任务id'
         },
-        pic: {
+        userid: {
             type: db.Sequelize.STRING,
-            comment: '页面json',
-            defaultValue: '{};'
+            allowNull: false,
+            comment: '用户id'
         },
-        gender: {
+        content: {
             type: db.Sequelize.STRING,
-            comment: '页面组件包cdn地址'
+            allowNull: false,
+            comment: '内容'
+        },
+        pics: {
+            type: db.Sequelize.STRING,
+            allowNull: false,
+            comment: '图片'
         }
     };
-
 }
 
-const User = db.define('User', getModelDefine(), {
+const Thought = db.define('Thought', getModelDefine(), {
 
-    tableName: 't_user',
+    tableName: 't_thought',
     timestamps: true,
 
     // 类方法
     classMethods: {
 
         getObject(data) {
-            const keys = ['id','email','username','password', 'pic', 'gender'];
+            const keys = ['id','taskid','userid','content'];
             return helper.getObjByKeys(data, keys);
         }
 
@@ -60,5 +55,5 @@ const User = db.define('User', getModelDefine(), {
 
 });
 
-module.exports = User;
+module.exports = Thought;
 

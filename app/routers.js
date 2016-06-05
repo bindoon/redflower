@@ -14,6 +14,7 @@ router.get('/api/index/tasklist', index.tasklist);  //任务列表
 router.get('/api/create/hotlist', create.hotlist);   // 热门推荐
 router.get('/api/create/query', create.query);   // 查询联想
 router.get('/api/create/new', create.new);   // 创建
+router.get('/api/create/newname', create.newname);   // 创建
 
 router.get('/api/task/checkin', task.checkin);    // 完成失败
 router.get('/api/task/remove', task.remove);  //删除
