@@ -18,12 +18,12 @@ function getModelDefine() {
         },
         desc: {
             type: db.Sequelize.STRING,
-            allowNull: false,
+            defaultValue: '',
             comment: '描述'
         },
-        clock: {
-            type: db.Sequelize.DATE,
-            allowNull: false,
+        alarm: {
+            type: db.Sequelize.STRING,
+            defaultValue: '7:00:00',
             comment: '创建人'
         }
     };

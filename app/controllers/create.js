@@ -11,7 +11,7 @@ const UserTask = require('../models/usertask');
 let createController = {
     hotlist:function *(next) {
 
-        let TaskPool = yield TaskPool.findAll();
+        let result = yield TaskPool.findAll();
 
         this.body = {
         success:true,
@@ -77,23 +77,24 @@ let createController = {
     new:function *(next) {    //完成失败
 
         let params = this.getParams();
-        let err =  helper.checkParams(params,['taskid','desc','alarm']);
+        let err =  helper.checkParams(params,['userid','taskid','desc','alarm']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
         }
 
-        let result = yield UserTask.create({
+        let result = yield UserTask.findOrCreate({
             taskid:params.taskid,
             desc:params.desc,
-            alarm:params.alarm
+            alarm:params.alarm,
+            userid:params.userid
         });
 
         this.body = {
             success:true,
             message:'success',
             result:{
-                info:result[0].dataValues
+                info:result.dataValues
             }
         }
     }

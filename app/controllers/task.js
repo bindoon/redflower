@@ -26,14 +26,20 @@ let taskController = {
         }
     },
     private:function *(next) {  //设置取消私密
+        let params = this.getParams();
 
-        let err =  helper.checkParams(this.getParams(),['userid','taskid','state']);
+        let err =  helper.checkParams(params,['userid','taskid','state']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
         }
 
-        let result = yield UserTask.update(params);
+        let result = yield UserTask.update(params,{
+            where:{
+                userid:params.userid,
+                taskid:params.taskid
+            }
+        });
 
         this.body = {
             success:true,
@@ -41,7 +47,8 @@ let taskController = {
         }
     },
     remove:function *(next) {
-        let err =  helper.checkParams(this.getParams(),['userid','taskid']);
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['userid','taskid']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
@@ -56,7 +63,8 @@ let taskController = {
     },
     // 心得
     thought:function *(next) {
-        let err =  helper.checkParams(this.getParams(),['userid','taskid','pics','content']);
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['userid','taskid','pics','content']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
@@ -71,7 +79,8 @@ let taskController = {
     },
     // 任务详细信息
     detail:function *(next) {
-        let err =  helper.checkParams(this.getParams(),['userid','taskid']);
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['userid','taskid']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
@@ -96,7 +105,8 @@ let taskController = {
     },
     // 心得列表
     thoughtlist:function *(next) {
-        let err =  helper.checkParams(this.getParams(),['userid','taskid']);
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['userid','taskid']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
@@ -117,7 +127,8 @@ let taskController = {
         }
     },
     monthdetail:function *(next) {
-        let err = helper.checkParams(this.getParams(), ['userid', 'taskid','month']);
+        let params = this.getParams();
+        let err = helper.checkParams(params, ['userid', 'taskid','month']);
         if (err.length) {
             this.body = helper.error(err.join(',') + ' required');
             return;

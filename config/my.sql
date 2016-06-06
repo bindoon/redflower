@@ -5,7 +5,7 @@ create table t_taskpool (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(128) NOT NULL,
   `desc` varchar(512) NOT NULL,
-  `clock` datetime,
+  `alarm` char(16) NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updatedAt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -16,10 +16,10 @@ create table t_usertask (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `taskid` int(11)  unsigned NOT NULL ,
   `userid` varchar(128)   NOT NULL,
-  `title` varchar(128) NOT NULL,
   `desc` varchar(512) NOT NULL,
-  `alarm` datetime,
-  `privite` smallint default 0,
+  `pic`  varchar(256) NOT NULL,
+  `alarm` char(16) NOT NULL,
+  `private` smallint default 0,
   `createdAt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updatedAt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   PRIMARY KEY (`id`)

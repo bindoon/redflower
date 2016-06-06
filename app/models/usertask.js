@@ -21,11 +21,6 @@ function getModelDefine() {
             allowNull: false,
             comment: '用户id'
         },
-        title: {
-            type: db.Sequelize.STRING,
-            allowNull: false,
-            comment: '页面标题'
-        },
         desc: {
             type: db.Sequelize.STRING,
             allowNull: false,
@@ -33,15 +28,17 @@ function getModelDefine() {
         },
         pic: {
             type: db.Sequelize.STRING,
-            allowNull: false,
+            defaultValue: "",
             comment: '图片'
         },
         alarm: {
-            type: db.Sequelize.DATE,
+            type: db.Sequelize.STRING,
+            defaultValue: '7:00:00',
             comment: '闹钟'
         },
         private: {
             type:db.Sequelize.BOOLEAN,
+            defaultValue: false,
             comment: '私有'
         }
     };
@@ -58,7 +55,8 @@ const UserTask = db.define('UserTask', getModelDefine(), {
         getObject(data) {
             const keys = ['id','taskid','userid','title','desc'];
             return helper.getObjByKeys(data, keys);
-        }
+        },
+
 
     },
 
