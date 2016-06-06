@@ -83,19 +83,18 @@ let createController = {
             return;
         }
 
-        let result = yield UserTask.findOrCreate({
+        let result = yield UserTask.upsert({
             taskid:params.taskid,
             desc:params.desc,
             alarm:params.alarm,
             userid:params.userid
         });
 
+        console.log(result)
+
         this.body = {
             success:true,
-            message:'success',
-            result:{
-                info:result.dataValues
-            }
+            message:'success'
         }
     }
 

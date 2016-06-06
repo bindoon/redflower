@@ -14,17 +14,19 @@ function getModelDefine() {
         taskid: {
             type: db.Sequelize.INTEGER,
             allowNull: false,
+            unique: true,
             comment: '任务id'
         },
         userid: {
             type: db.Sequelize.STRING,
             allowNull: false,
+            unique: true,
             comment: '用户id'
         },
         desc: {
             type: db.Sequelize.STRING,
-            allowNull: false,
-            comment: '描述'
+            defaultValue: "",
+            comment: '目标'
         },
         pic: {
             type: db.Sequelize.STRING,

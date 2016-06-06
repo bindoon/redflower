@@ -23,7 +23,7 @@ module.exports = {
                 } catch (err) {
                     console.error(err);
                     logger.error(err);
-                    this.body = {success: false, message: err.message, stack: err.stack};
+                    this.body = {success: false, message: err.message};
                 }
             };
         });

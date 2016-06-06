@@ -3,6 +3,7 @@
 
 const logger = require('koa-logger');
 const helper = require('../lib/helper');
+const moment = require('moment');
 
 const UserTask = require('../models/usertask');
 const Checkin = require('../models/checkin');
@@ -12,13 +13,25 @@ const Thought = require('../models/thought');
 let taskController = {
     checkin:function *(next) {   //完成失败
         let params = this.getParams();
-        let err =  helper.checkParams(params,['userid','taskid','state']);
+        let err =  helper.checkParams(params,['userid','taskid']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
         }
 
-        let result = yield Checkin.create(params);
+        let result = yield Checkin.findOne({where:params});
+        if(result) {
+            result = result.dataValues;
+            if(result.createdAt && moment(result.createdAt).format('YYYYMMDD') ===  moment().format('YYYYMMDD') ) {
+                this.body = {
+                    success: false,
+                    message: '您已经打过卡了'
+                }
+                return;
+            }
+        }
+
+        yield Checkin.create(params);
 
         this.body = {
             success:true,
@@ -28,18 +41,13 @@ let taskController = {
     private:function *(next) {  //设置取消私密
         let params = this.getParams();
 
-        let err =  helper.checkParams(params,['userid','taskid','state']);
+        let err =  helper.checkParams(params,['userid','taskid','private']);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
         }
 
-        let result = yield UserTask.update(params,{
-            where:{
-                userid:params.userid,
-                taskid:params.taskid
-            }
-        });
+        let result = yield UserTask.upsert(params);
 
         this.body = {
             success:true,
@@ -54,7 +62,7 @@ let taskController = {
             return;
         }
 
-        let result = yield UserTask.remove(params);
+        let result = yield UserTask.destroy({where:params});
 
         this.body = {
             success:true,

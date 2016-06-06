@@ -20,11 +20,6 @@ function getModelDefine() {
             type: db.Sequelize.STRING,
             allowNull: false,
             comment: '用户id'
-        },
-        status: {
-            type: db.Sequelize.INTEGER,
-            allowNull: false,
-            comment: '状态'
         }
     };
 }
@@ -38,10 +33,9 @@ const CheckIn = db.define('CheckIn', getModelDefine(), {
     classMethods: {
 
         getObject(data) {
-            const keys = ['id','taskid','userid','title','desc'];
+            const keys = ['id','taskid','userid','state'];
             return helper.getObjByKeys(data, keys);
         }
-
     },
 
     // 实例方法

@@ -1,6 +1,62 @@
 {{extend ("./layout") }}
 
 {{#block ("content") }}
-<h1>内容</h1>
 
-{{/block}}
+创建类接口demo：
+
+<h2>创建</h2>
+        /api/create/newname：
+<form action="/api/create/newname">
+<input name="keyword" placeholder="keyword"/>
+<input type="submit"/>
+</form>
+<hr/>
+        /api/create/new：
+<form action="/api/create/new">
+userid:<input name="userid" placeholder="userid" value="1"/>
+taskid:<input name="taskid" placeholder="taskid" value="1"/>
+desc:<input name="desc" placeholder="desc"   value="测试目标设置"/>
+alarm:<input name="alarm" placeholder="alarm" value="7:00:00"/>
+<input type="submit"/>
+</form>
+<hr/>
+
+<h2>任务设置</h2>
+私有：
+<form action="/api/task/private">
+userid:    <input name="userid" value="1" placeholder=""/>
+taskid:    <input name="taskid" value="1"/>
+private:(1为yes,0:false) <input name="private" value="1"/>
+    <input type="submit"/>
+</form>
+<hr/>
+        删除任务：
+<form action="/api/task/remove">
+userid:    <input name="userid" value="1" placeholder=""/>
+taskid:    <input name="taskid" value="1"/>
+<input type="submit"/>
+</form>
+<hr/>
+
+        提交心得：
+<form action="/api/task/thought">
+userid:    <input name="userid" value="1" placeholder=""/>
+taskid:    <input name="taskid" value="1"/>
+pics:    <input name="pics" value=""/>
+content:    <textarea name="content" >写自己的心得</textarea>
+<input type="submit"/>
+</form>
+<hr/>
+
+        打卡：
+<form action="/api/task/checkin">
+userid:    <input name="userid" value="1" placeholder=""/>
+taskid:    <input name="taskid" value="1"/>
+state:(1为yes,0:false) <input name="state" value="1"/>
+<input type="submit"/>
+</form>
+<hr/>
+
+
+
+        {{/block}}
