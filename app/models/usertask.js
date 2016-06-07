@@ -55,7 +55,7 @@ const UserTask = db.define('UserTask', getModelDefine(), {
     classMethods: {
 
         getObject(data) {
-            const keys = ['id','taskid','userid','title','desc'];
+            const keys = ['taskid','userid'];
             return helper.getObjByKeys(data, keys);
         },
 

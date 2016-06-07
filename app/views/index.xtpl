@@ -2,7 +2,6 @@
 
 {{#block ("content") }}
 
-创建类接口demo：
 
 <h2>创建</h2>
         /api/create/newname：
@@ -21,8 +20,19 @@ alarm:<input name="alarm" placeholder="alarm" value="7:00:00"/>
 </form>
 <hr/>
 
+<h2>课程获取</h2>
+        热门功课推荐 (首页、创建课程页)   <a href="/api/create/hotlist">/api/create/hotlist</a>
+<hr/>
+        联想查询  ：/api/create/query
+<form action="/api/create/query">
+<input name="keyword" placeholder="keyword" value="天"/>
+<input type="submit"/>
+</form>
+<hr/>
+
+
 <h2>任务设置</h2>
-私有：
+私有：/api/task/private
 <form action="/api/task/private">
 userid:    <input name="userid" value="1" placeholder=""/>
 taskid:    <input name="taskid" value="1"/>
@@ -30,7 +40,8 @@ private:(1为yes,0:false) <input name="private" value="1"/>
     <input type="submit"/>
 </form>
 <hr/>
-        删除任务：
+
+        删除任务：/api/task/remove
 <form action="/api/task/remove">
 userid:    <input name="userid" value="1" placeholder=""/>
 taskid:    <input name="taskid" value="1"/>
@@ -38,7 +49,7 @@ taskid:    <input name="taskid" value="1"/>
 </form>
 <hr/>
 
-        提交心得：
+        提交心得：/api/task/thought
 <form action="/api/task/thought">
 userid:    <input name="userid" value="1" placeholder=""/>
 taskid:    <input name="taskid" value="1"/>
@@ -48,7 +59,7 @@ content:    <textarea name="content" >写自己的心得</textarea>
 </form>
 <hr/>
 
-        打卡：
+        打卡：/api/task/checkin
 <form action="/api/task/checkin">
 userid:    <input name="userid" value="1" placeholder=""/>
 taskid:    <input name="taskid" value="1"/>
@@ -57,6 +68,24 @@ state:(1为yes,0:false) <input name="state" value="1"/>
 </form>
 <hr/>
 
+
+
+<h2>打卡相关获取</h2>
+        所有心得：/api/task/thoughtlist
+
+<form action="/api/task/thoughtlist">
+userid:    <input name="userid" value="1" placeholder=""/>
+taskid:    <input name="taskid" value="1"/>
+<input type="submit"/>
+</form>
+<hr/>
+        任务详情获取：/api/task/detail
+<form action="/api/task/detail">
+userid:    <input name="userid" value="1" placeholder=""/>
+taskid:    <input name="taskid" value="1"/>
+<input type="submit"/>
+</form>
+<hr/>
 
 
         {{/block}}

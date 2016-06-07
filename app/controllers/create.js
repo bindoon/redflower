@@ -11,42 +11,40 @@ const UserTask = require('../models/usertask');
 let createController = {
     hotlist:function *(next) {
 
-        let result = yield TaskPool.findAll();
+        let result = yield TaskPool.findAll({attributes:['id','title']});
 
         this.body = {
         success:true,
-        message:'success',
+        message:'暂时缺maxNum字段后面补充',
         result: {
-            data: [{
-                title:'每天阅读半小时',
-                nowNum:101
-
-            },{
-                title:'每天早起',
-                nowNum:99
-
-            },{
-                title:'戒烟',
-                nowNum:100
-
-            },{
-                title:'读书',
-                nowNum:100
-
-            }
-            ]
+            data: result
         }
       }
     },
     query:function *(next) {
 
-      this.body = {
+        let params = this.getParams();
+        let err =  helper.checkParams(params,['keyword']);
+        if(err.length) {
+            this.body = helper.error(err.join(',')+' required');
+            return;
+        }
+
+        let result = yield TaskPool.findAll({
+            attributes:['id','title'],
+            where:{
+                title: {
+                    $like:'%'+params.keyword+'%'
+                }
+            }
+        });
+
+
+        this.body = {
         success:true,
         message:'success',
         result:{
-            data:[
-                '每日看书','每日阅读','天天看书','天天阅读'
-            ]
+            data:result
         }
       }
     },
@@ -68,9 +66,7 @@ let createController = {
             success:true,
             message:'success',
             result:{
-                info:{
-                    taskid:result[0].dataValues.id
-                }
+                taskid:result[0].dataValues.id
             }
         }
     },
@@ -89,8 +85,6 @@ let createController = {
             alarm:params.alarm,
             userid:params.userid
         });
-
-        console.log(result)
 
         this.body = {
             success:true,

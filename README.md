@@ -41,9 +41,7 @@ http://bouda.cn:3300/
 {
     "success":true,
     "result":{
-        "info":{
-            "taskid":1,
-        }
+        "taskid":1,
     }
 }
 ```
@@ -145,7 +143,7 @@ http://bouda.cn:3300/
 * 闹钟 /api/task/clock
 * 计划 /api/task/plan
 
-* 详细信息 /api/task/monthdetail
+* ~~详细信息 /api/task/monthdetail  (暂时不用）~~
 
     |入参|描述|可选值|
 |---|---|---|

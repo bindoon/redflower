@@ -5,6 +5,7 @@ const logger = require('koa-logger');
 const helper = require('../lib/helper');
 const moment = require('moment');
 
+const TaskPool = require('../models/taskpool');
 const UserTask = require('../models/usertask');
 const Checkin = require('../models/checkin');
 const Thought = require('../models/thought');
@@ -94,20 +95,46 @@ let taskController = {
             return;
         }
 
-        let result = yield UserTask.findAll();
+        let taskInfo = yield  TaskPool.findOne({
+            where:{
+                id:params.taskid
+            },
+            attributes:['id','title']
+        });
 
+        if(!taskInfo) {
+            this.body = {
+                success: false,
+                message: 'task not found'
+            }
+            return;
+        }
+
+        let userTaskInfo = yield UserTask.findOne({
+            where:UserTask.getObject(params)
+        });
+
+        if(!userTaskInfo) {
+            this.body = {
+                success: false,
+                message: 'not found'
+            }
+            return;
+        }
+
+        let checkinInfo = yield Checkin.findAll({
+            where:UserTask.getObject(params)
+        })
+
+        let checkInfo = checkinInfo.map((i)=>{
+            return moment(i.createdAt).format('YYYY-MM-DD');
+        })
         this.body = {
             success:true,
             "result":{
-                "info":{
-                    "taskid":1,
-                    "state":0,
-                    "name":"",
-                    "clock":"19:30",
-                    "count":22,
-                    "monthInfo":[1,3,5],
-                    "totalDay":50
-                }
+                "taskInfo":taskInfo,
+                userTaskInfo:userTaskInfo,
+                checkinInfo:checkInfo
             }
         }
     },
@@ -120,18 +147,15 @@ let taskController = {
             return;
         }
 
-        let result = yield Thought.findAll();
+        let result = yield Thought.findAll({
+            where:Thought.getObject(params)
+        });
 
         this.body = {
             "success":true,
             "result":{
-                "list":[{
-                    "pics":[],
-                    "content":"",
-                    "createat": "2016-4-4 4:4:4"
-                }]
+                "list":result
             }
-
         }
     },
     monthdetail:function *(next) {

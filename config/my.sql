@@ -1,4 +1,5 @@
 create database redflower;
+use redflower;
 
 -- 任务池子 --
 create table t_taskpool (

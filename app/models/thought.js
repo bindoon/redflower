@@ -43,7 +43,7 @@ const Thought = db.define('Thought', getModelDefine(), {
     classMethods: {
 
         getObject(data) {
-            const keys = ['id','taskid','userid','content'];
+            const keys = ['taskid','userid'];
             return helper.getObjByKeys(data, keys);
         }
 
