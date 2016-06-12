@@ -33,7 +33,7 @@ const CheckIn = db.define('CheckIn', getModelDefine(), {
     classMethods: {
 
         getObject(data) {
-            const keys = ['id','taskid','userid','state'];
+            const keys = ['taskid','userid'];
             return helper.getObjByKeys(data, keys);
         }
     },

@@ -100,15 +100,10 @@ http://bouda.cn:3300/
 {
     "success":true,
     "result":{
-        "info":{
-            "taskid":1,
-            "state":0,
-            "name":"",
-            "clock":"19:30",
-            "count":22,
-            "monthInfo":[1,3,5],
-            "totalDay":50
-        }
+        "taskinfo":{
+        },
+        "userTaskInfo":{},
+        "checkinInfo":{}
     }
 
 }

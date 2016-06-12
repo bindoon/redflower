@@ -32,7 +32,7 @@ let taskController = {
             }
         }
 
-        yield Checkin.create(params);
+        yield Checkin.create(Checkin.getObject(params));
 
         this.body = {
             success:true,
@@ -132,7 +132,7 @@ let taskController = {
         this.body = {
             success:true,
             "result":{
-                "taskInfo":taskInfo,
+                taskInfo:taskInfo,
                 userTaskInfo:userTaskInfo,
                 checkinInfo:checkInfo
             }
