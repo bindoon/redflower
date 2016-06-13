@@ -51,9 +51,10 @@ module.exports = {
         return result;
     },
 
-    checkParams(obj,list) {
+    checkParams(obj,list, empty) {
+        typeof empty === 'undefined' && (empty = true);
         return list.map((i)=>{
-            return i in obj? null:i;
+            return i in obj? (!empty&&!obj[i]? i:null):i;
         }).filter((i)=>{
             return i!=null
         })

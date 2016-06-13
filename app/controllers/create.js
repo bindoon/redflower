@@ -24,7 +24,7 @@ let createController = {
     query:function *(next) {
 
         let params = this.getParams();
-        let err =  helper.checkParams(params,['keyword']);
+        let err =  helper.checkParams(params,['keyword'], false);
         if(err.length) {
             this.body = helper.error(err.join(',')+' required');
             return;
