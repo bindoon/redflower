@@ -63,6 +63,8 @@ content:    <textarea name="content" >写自己的心得</textarea>
 <form action="/api/task/checkin">
 userid:    <input name="userid" value="1" placeholder=""/>
 taskid:    <input name="taskid" value="1"/>
+state:(1为成功,0:失败) <input name="state" value="1"/>
+
 <input type="submit"/>
 </form>
 <hr/>

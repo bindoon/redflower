@@ -44,6 +44,7 @@ create table t_checkin (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `taskid` int(11)  unsigned NOT NULL ,
   `userid` varchar(128)   NOT NULL,
+  `state` smallint NOT NULL default 0,
   `createdAt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updatedAt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   PRIMARY KEY (`id`)

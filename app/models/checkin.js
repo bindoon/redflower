@@ -20,6 +20,11 @@ function getModelDefine() {
             type: db.Sequelize.STRING,
             allowNull: false,
             comment: '用户id'
+        },
+        state: {
+            type: db.Sequelize.BOOLEAN,
+            defaultValue:false,
+            comment: '打卡'
         }
     };
 }
@@ -33,7 +38,7 @@ const CheckIn = db.define('CheckIn', getModelDefine(), {
     classMethods: {
 
         getObject(data) {
-            const keys = ['taskid','userid'];
+            const keys = ['taskid','userid','state'];
             return helper.getObjByKeys(data, keys);
         }
     },
