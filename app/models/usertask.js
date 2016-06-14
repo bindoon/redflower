@@ -57,9 +57,7 @@ const UserTask = db.define('UserTask', getModelDefine(), {
         getObject(data) {
             const keys = ['taskid','userid'];
             return helper.getObjByKeys(data, keys);
-        },
-
-
+        }
     },
 
     // 实例方法

@@ -51,7 +51,6 @@ const User = db.define('User', getModelDefine(), {
             const keys = ['id','email','username','password', 'pic', 'gender'];
             return helper.getObjByKeys(data, keys);
         }
-
     },
 
     // 实例方法

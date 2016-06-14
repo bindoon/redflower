@@ -36,12 +36,10 @@ const TaskPool = db.define('TaskPool', getModelDefine(), {
 
     // 类方法
     classMethods: {
-
         getObject(data) {
             const keys = ['id','title'];
             return helper.getObjByKeys(data, keys);
         }
-
     },
 
     // 实例方法
