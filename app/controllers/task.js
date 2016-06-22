@@ -137,7 +137,7 @@ let taskController = {
         let checkInfo = checkinInfo.map((i)=> {
             return {
                 state: i.state,
-                time: moment(i.createdAt).format('YYYY-MM-DD HH:mm:ss')
+                time: i.createdAt
             }
         })
         this.body = {

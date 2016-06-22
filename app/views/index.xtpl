@@ -88,5 +88,11 @@ taskid:    <input name="taskid" value="1"/>
 </form>
 <hr/>
 
+<h2>首页数据获取</h2>
+        /api/index/tasklist
+<form action="/api/index/tasklist">
+userid:    <input name="userid" value="1" placeholder=""/>
+<input type="submit"/>
+</form>
 
         {{/block}}
